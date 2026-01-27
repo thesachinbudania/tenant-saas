@@ -1,65 +1,125 @@
-import Image from "next/image";
-
+'use client';
+import { About3 } from "@/components/about3";
+import { Hero115 } from "@/components/hero115";
+import { Navbar1 } from "@/components/navbar1";
+import { Pricing4 } from "@/components/pricing4";
+import { Footer2 } from "@/components/footer2";
+import { getCurrentUser } from "@/lib/api";
+import React from "react";
 export default function Home() {
+  React.useEffect(() => {
+    getCurrentUser().then((user) => {
+      if (user) {
+        window.location.href = '/dashboard'
+      }
+    })
+  }, [])
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="min-h-screen w-full flex flex-col font-sans">
+      <Navbar1 />
+      <div className="pt-16">
+        <Hero115
+          heading="The Secure Foundation for Multi-Tenant SaaS"
+          description="Build, deploy, and scale your application with enterprise-grade isolation and security. The infrastructure choice for serious organizations."
+          button={{
+            text: "Start Building",
+            url: "/auth/signup",
+          }}
+          trustText="Trusted by security-first organizations worldwide"
+          imageSrc="/images/hero.jpg"
+          imageAlt="Dashboard Preview"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <About3
+          title="Engineered for Complete Isolation"
+          description="Data sovereignty and tenant isolation aren't just features—they are our architecture. Experience the peace of mind that comes with true multi-tenancy."
+          mainImage={{
+            src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80",
+            alt: "Architecture Diagram"
+          }}
+          secondaryImage={{
+            src: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
+            alt: "Security Shield"
+          }}
+          breakout={{
+            title: "Zero-Trust Security",
+            description: "Every request is authenticated and authorized at the edge. default-deny policies ensure your data never leaks.",
+            buttonText: "Read the Whitepaper",
+            buttonUrl: "#",
+            src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-1.svg",
+            alt: "Security Icon"
+          }}
+          achievementsTitle="Scale Without Compromise"
+          achievementsDescription="Our platform is designed to handle millions of requests while maintaining strict isolation guarantees."
+          achievements={[
+            { label: "Uptime SLA", value: "99.99%" },
+            { label: "Tenants Secured", value: "10k+" },
+            { label: "Data Leaks", value: "0" },
+            { label: "Global Regions", value: "12" },
+          ]}
+        />
+
+        <Pricing4
+          title="Transparent, Predictable Pricing"
+          description="Choose the plan that fits your growth. No hidden fees, just secure infrastructure."
+          plans={[
+            {
+              name: "Starter",
+              badge: "Bootstrap",
+              monthlyPrice: "$0",
+              yearlyPrice: "$0",
+              features: [
+                "Up to 5 Tenants",
+                "Basic Isolation",
+                "Community Support",
+                "99.9% Uptime",
+              ],
+              buttonText: "Start for Free",
+            },
+            {
+              name: "Growth",
+              badge: "Most Popular",
+              monthlyPrice: "$49",
+              yearlyPrice: "$490",
+              features: [
+                "Unlimited Tenants",
+                "Advanced Isolation",
+                "Priority Support",
+                "99.99% Uptime",
+                "Audit Logs",
+              ],
+              buttonText: "Get Growth",
+              isPopular: true,
+            },
+            {
+              name: "Enterprise",
+              badge: "Custom",
+              monthlyPrice: "Custom",
+              yearlyPrice: "Custom",
+              features: [
+                "Dedicated Infrastructure",
+                "Custom Contracts",
+                "24/7 Dedicated Support",
+                "SLA Guarantees",
+                "On-premise Options"
+              ],
+              buttonText: "Contact Sales",
+            },
+          ]}
+        />
+      </div>
+
+      <Footer2
+        className="mt-auto border-t"
+        logo={{
+          src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
+          alt: "Covert Logo",
+          title: "Covert.",
+          url: "/"
+        }}
+        tagline="Securing the modern web, one tenant at a time."
+        copyright="© 2024 Covert Systems Inc. All rights reserved."
+      />
+    </main>
   );
 }
