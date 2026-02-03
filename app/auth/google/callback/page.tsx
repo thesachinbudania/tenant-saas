@@ -10,8 +10,19 @@ import {
     AlertDescription,
 } from "@/components/ui/alert";
 import { BadgeCheck, CircleAlert } from "lucide-react"
+import { Suspense } from "react";
 
-export default function GoogleCallback() {
+export default function Callback() {
+    return (
+        <Suspense fallback={<div className="flex min-h-screen w-full items-center justify-center bg-muted/40 p-4">
+            <Spinner className="size-8" />
+        </div>}>
+            <GoogleCallback />
+        </Suspense>
+    )
+}
+
+function GoogleCallback() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
