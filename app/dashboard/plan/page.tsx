@@ -24,7 +24,6 @@ const ProductCard = ({ product, isActive = false }: { product: any, isActive?: b
     const [isLoading, setIsLoading] = useState(false);
     const handleSubscribe = () => {
         setIsLoading(true);
-        console.log(product.price_id)
         api.post('/payments/create-checkout-session/', {
             price_id: product.price_id,
         })

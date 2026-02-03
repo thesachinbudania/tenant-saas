@@ -7,13 +7,7 @@ import { Footer2 } from "@/components/footer2";
 import { getCurrentUser } from "@/lib/api";
 import React from "react";
 export default function Home() {
-  React.useEffect(() => {
-    getCurrentUser().then((user) => {
-      if (user) {
-        window.location.href = '/dashboard'
-      }
-    })
-  }, [])
+
   return (
     <main className="min-h-screen w-full flex flex-col font-sans">
       <Navbar1 />

@@ -11,7 +11,6 @@ export const api = axios.create({
     },
 });
 
-console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
 
 // ─────────────────────────────────────────────────────────────
 // Refresh control (prevents token refresh storms)
@@ -82,7 +81,9 @@ api.interceptors.response.use(
                     }).catch(() => {
                         // Ignore logout errors (e.g. 401), just redirect
                     }).finally(() => {
-                        if (window.location.href != process.env.NEXT_PUBLIC_API_BASE_URL + '/' || window.location.href != process.env.NEXT_PUBLIC_API_BASE_URL) {
+                        const location = window.location.href
+                        const url = process.env.NEXT_PUBLIC_API_BASE_URL
+                        if (location != url + '/' || location != url || location != url + '/auth/login' || location != url + '/auth/login/') {
                             window.location.href = "/auth/login";
                         }
                     });

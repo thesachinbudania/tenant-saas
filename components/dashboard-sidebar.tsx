@@ -12,7 +12,7 @@ import {
     SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { Cog, Gem } from "lucide-react";
+import { Cog, Gem, LayoutDashboard } from "lucide-react";
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
 import {
@@ -35,10 +35,14 @@ import {
 import { useSidebar } from "@/components/ui/sidebar";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { getCurrentUser } from "@/lib/api";
+import useUserStore from "@/lib/stores/user";
+import { usePathname } from "next/navigation";
 
 export function DashboardSidebar() {
     const { state } = useSidebar();
     const isCollapsed = state === 'collapsed';
+    const pathname = usePathname();
     return (
         <Sidebar collapsible="icon">
             <SidebarContent>
@@ -48,7 +52,7 @@ export function DashboardSidebar() {
                             <Link href="/dashboard">
                                 <div className="flex justify-center border-b-2 border-b-muted py-4">
                                     <h3 className="text-lg font-semibold">
-                                        Covert. Dashboard
+                                        Covert.
                                     </h3>
                                 </div>
                             </Link>
@@ -58,11 +62,26 @@ export function DashboardSidebar() {
                 </SidebarHeader>
                 <SidebarContent>
                     <SidebarGroup>
+                        <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
+                        <SidebarGroupContent>
+                            <SidebarMenu>
+                                <SidebarMenuItem >
+                                    <SidebarMenuButton asChild isActive={pathname === '/dashboard'}>
+                                        <Link href="/dashboard">
+                                            <LayoutDashboard />
+                                            Dashboard
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            </SidebarMenu>
+                        </SidebarGroupContent>
+                    </SidebarGroup>
+                    <SidebarGroup>
                         <SidebarGroupLabel>Account</SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 <SidebarMenuItem>
-                                    <SidebarMenuButton asChild>
+                                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/settings'}>
                                         <Link href="/dashboard/settings">
                                             <Cog />
                                             Settings
@@ -70,7 +89,7 @@ export function DashboardSidebar() {
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                                 <SidebarMenuItem>
-                                    <SidebarMenuButton asChild>
+                                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/plan'}>
                                         <Link href="/dashboard/plan">
                                             <Gem />
                                             Change Plan
@@ -135,17 +154,22 @@ export function DashboardSidebar() {
 }
 
 function UserCard() {
-    const [userData, setUserData] = useState({})
+    const [userData, setUserData] = useState<any>(null)
     const [loading, setLoading] = useState(true)
+    const { user, setUser } = useUserStore()
     useEffect(() => {
-        const getUserData = async () => {
-            const data = await api.get('/dj-rest-auth/user/')
-            setUserData(data.data)
+        if (user) {
+            setUserData(user)
             setLoading(false)
+            return
         }
-        getUserData()
+        getCurrentUser().then((res) => {
+            setUserData(res)
+            setUser(res)
+            setLoading(false)
+        })
     }, [])
-    return loading ? <>
+    return loading || !user ? <>
         <Skeleton className="size-10 rounded-full" />
         <div className="grid flex-1 gap-1">
             <Skeleton className="h-3 w-20 rounded" />
@@ -154,12 +178,12 @@ function UserCard() {
     </> : (
         <>
             <Avatar className="size-10">
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>SC</AvatarFallback>
+                <AvatarImage src="null" />
+                <AvatarFallback>{user.username.charAt(0).toUpperCase() + user.username.charAt(1).toUpperCase()}</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">Shadcn</span>
-                <span className="truncate text-xs">shadcn@ui.com</span>
+                <span className="truncate font-medium">{user.username}</span>
+                <span className="truncate text-xs">{user.email}</span>
             </div>
         </>
     )

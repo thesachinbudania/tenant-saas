@@ -123,7 +123,7 @@ export default function LoginPage() {
                                 </Alert>
                             )
                         }
-                        <Button className="w-full" onClick={form.handleSubmit(submitHandler)} disabled={form.formState.isSubmitting}>
+                        <Button className="w-full" onClick={() => form.handleSubmit(submitHandler)} disabled={form.formState.isSubmitting}>
                             {form.formState.isSubmitting ? <Spinner /> : 'Login'}
                         </Button>
                         <div className="relative">
