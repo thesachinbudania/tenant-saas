@@ -107,7 +107,7 @@ export default function Plan() {
             <div className="flex gap-4 flex-col xl:flex-row justify-center items-center">
                 {
                     data.map((product: any) => (
-                        <ProductCard key={product.id} product={product} isActive={subscription.product_active.id === product.id} />
+                        <ProductCard key={product.id} product={product} isActive={subscription?.product_active?.id === product.id} />
                     ))
                 }
             </div>

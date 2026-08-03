@@ -50,7 +50,7 @@ export default function LoginPage() {
     const submitHandler: SubmitHandler<z.infer<typeof loginSchema>> = async (data) => {
         try {
             await api.post('/dj-rest-auth/login/', data)
-            window.location.href = '/'
+            window.location.href = '/dashboard'
         } catch (error) {
             handleApiError(error, form.setError)
         }
