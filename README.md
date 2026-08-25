@@ -3,6 +3,7 @@
 # 🛡️ Covert SaaS
 ### **Enterprise Multi-Tenant Architecture & Subscription Platform**
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-covert.sachinbudania.com-success?style=for-the-badge&logo=vercel&logoColor=white)](https://covert.sachinbudania.com)
 [![Next.js](https://img.shields.io/badge/Next.js-16.1.1-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -17,6 +18,7 @@
 </p>
 
 <p align="center">
+  <a href="#-quick-links">Quick Links</a> •
   <a href="#-key-features">Key Features</a> •
   <a href="#-architecture--data-flow">Architecture</a> •
   <a href="#-tech-stack">Tech Stack</a> •
@@ -30,6 +32,14 @@
 ---
 
 </div>
+
+## 🔗 Quick Links
+
+- **Live Web Application:** [https://covert.sachinbudania.com](https://covert.sachinbudania.com)
+- **Live Backend REST API:** [https://covertbackend.sachinbudania.com](https://covertbackend.sachinbudania.com)
+- **Tenant Backend Repository / Directory:** [tenant_backend](../tenant_backend/)
+
+---
 
 ## 🌟 Overview
 
@@ -394,6 +404,17 @@ export const handleApiError = (error: any, setError: any) => {
     </tr>
   </table>
 </div>
+
+---
+
+## 👨💻 Author
+
+**Sachin Budania**
+
+- **Live Portfolio / Website:** [sachinbudania.com](https://sachinbudania.com)
+- **Live Project Demo:** [covert.sachinbudania.com](https://covert.sachinbudania.com)
+- **Live API Backend:** [covertbackend.sachinbudania.com](https://covertbackend.sachinbudania.com)
+- **GitHub:** [@Sachin-Budania](https://github.com/thesachinbudania)
 
 ---
 
